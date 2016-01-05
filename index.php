@@ -13,6 +13,7 @@ ini_set('display_errors', 1);
 
 function myAutoload($pClassName) {
 
+        //$pathParts = explode('\\', $class);
         $fileName = __DIR__ . DIRECTORY_SEPARATOR ."classes". DIRECTORY_SEPARATOR. $pClassName . ".php";
         if (file_exists($fileName)) {
             require_once $fileName;
