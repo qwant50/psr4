@@ -9,26 +9,30 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-//use A\MyClass1;
+use A\MyClass1 as MySuperClass;
 
-function myAutoload($pClassName) {
+Class Autoloader
+{
+    public static function myAutoload($pClassName)
+    {
 
-        //$pathParts = explode('\\', $class);
-        $fileName = __DIR__ . DIRECTORY_SEPARATOR ."classes". DIRECTORY_SEPARATOR. $pClassName . ".php";
+        $pathParts = explode('\\', $pClassName);
+        $fileName = __DIR__ . DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . $pathParts[sizeof($pathParts) - 1] . ".php";
         if (file_exists($fileName)) {
             require_once $fileName;
             return true;
         };
-        echo 'Class: '. $fileName .' not found';
+        echo 'Class: ' . $fileName . ' not found';
         return false;
-};
+    }
+}
 
 spl_autoload_extensions(".php");
-spl_autoload_register("myAutoload");
+spl_autoload_register("Autoloader::myAutoload");
 
 echo __NAMESPACE__;
 
-$myClass1 = new MyClass1();
+$myClass1 = new A\MyClass1();
 echo $myClass1->field;
 
 ?>

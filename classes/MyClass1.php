@@ -6,7 +6,7 @@
  * Time: 4:30 PM
  */
 
-//namespace A;
+namespace A;
 
 Class MyClass1 {
     public $field = 5;
