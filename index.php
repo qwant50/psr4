@@ -9,23 +9,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+define("DIR_TO_CLASSES", __DIR__ . DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR);
+require_once DIR_TO_CLASSES .'Autoloader.php';
+
 use A\MyClass1 as MySuperClass;
-
-Class Autoloader
-{
-    public static function myAutoload($pClassName)
-    {
-
-        $pathParts = explode('\\', $pClassName);
-        $fileName = __DIR__ . DIRECTORY_SEPARATOR . "classes" . DIRECTORY_SEPARATOR . $pathParts[sizeof($pathParts) - 1] . ".php";
-        if (file_exists($fileName)) {
-            require_once $fileName;
-            return true;
-        };
-        echo 'Class: ' . $fileName . ' not found';
-        return false;
-    }
-}
 
 spl_autoload_extensions(".php");
 spl_autoload_register("Autoloader::myAutoload");
